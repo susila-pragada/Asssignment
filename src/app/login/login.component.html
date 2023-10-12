@@ -1,0 +1,65 @@
+<h3>login..</h3>
+
+<div class="container">
+  <div class="row">
+    <div class="col -md-6 offset-md-3">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email-Id</label>
+          <input
+            type="text"
+            placeholder="abc@gmail.com"
+            formControlName="email"
+            [ngClass]="{
+              'is-invalid': submitted && loginForm.controls.email.errors
+            }"
+            class="form-control"
+          />
+          <div
+            *ngIf="submitted && loginForm.controls.email.errors"
+            class="text-danger"
+          >
+            <div *ngIf="submitted && loginForm.controls.email.errors.required">
+              Email is required
+            </div>
+            <div *ngIf="submitted && loginForm.controls.email.errors.email">
+              Email is not in valid format
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            formControlName="password"
+            [ngClass]="{
+              'is-invalid': submitted && loginForm.controls.password.errors
+            }"
+            class="form-control"
+          />
+          <div
+            *ngIf="submitted && loginForm.controls.password.errors"
+            class="text-danger"
+          >
+            <div
+              *ngIf="submitted && loginForm.controls.password.errors.required"
+            >
+              Password is required
+            </div>
+            <div
+              *ngIf="submitted && loginForm.controls.password.errors.minlength"
+            >
+              Password should be 8 characters
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary" [disabled]="!loginForm.valid">Sign-In</button>&nbsp;
+        </div>
+        <a routerLink="/register" >newuser? signup Here</a>
+      </form>
+    </div>
+  </div>
+</div>
